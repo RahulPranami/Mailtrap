@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  # Database
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    networks:
+      - wpsite
+    volumes:
+      - ./mysql:/var/lib/mysql
+  # WordPress
+  wordpress:
+    image: wordpress:latest
+    ports:
+      - 8006:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DEBUG: true
+    volumes:
+      - ./:/var/www/html/wp-content/plugins/mailtrap
+    depends_on:
+      - db
+    networks:
+      - wpsite
+
+networks:
+  wpsite:
+volumes:
+  mysql:
+  wordpress:
