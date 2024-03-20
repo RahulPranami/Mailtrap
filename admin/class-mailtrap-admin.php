@@ -100,4 +100,59 @@ class Mailtrap_Admin {
 
 	}
 
+	/**
+	 * Register the JavaScript for the admin area.
+	 *
+	 * @since    1.0.0
+	 */
+	public function mailtrap_menu() {
+		add_options_page( 'Mailtrap for Wordpress', 'Mailtrap', 'manage_options', 'mailtrap-settings', array($this, 'settings_page' ) );
+		// add_submenu_page( '', 'Mailtrap for Wordpress', 'Mailtrap Test', 'manage_options', 'mailtrap-test', array($this, 'test_page' ));
+		// add_submenu_page( '', 'Mailtrap for Wordpress', 'Mailtrap Inbox', 'manage_options', 'mailtrap-inbox', array($this, 'inbox_page' ));
+	}
+
+	public function register_settings() {
+		register_setting('mailtrap-settings', 'mailtrap_enabled');
+		register_setting('mailtrap-settings', 'mailtrap_username');
+		register_setting('mailtrap-settings', 'mailtrap_password');
+
+		register_setting('mailtrap-settings', 'mailtrap_api_token');
+		register_setting('mailtrap-settings', 'mailtrap_inbox_id');
+	}
+
+	public function settings_page() {
+		include plugin_dir_path( __FILE__ ) . '/partials/settings.php';
+	}
+
+	public function test_page() {
+		$email_sent = null;
+
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+			if (!wp_verify_nonce($_POST['_wpnonce'], 'mailtrap_test_action')) {
+				die ('Failed security check');
+			}
+
+			$email_sent = wp_mail($_POST['to'], __('Mailtrap for Wordpress Plugin', 'mailtrap-for-wp'), $_POST['message']);
+		}
+
+		include plugin_dir_path( __FILE__ ) . '/partials/test.php';
+	}
+
+	public function inbox_page() {
+		include plugin_dir_path( __FILE__ ) . '/partials/inbox.php';
+	}
+
+	public function mailtrap($phpmailer) {
+		if (get_option('mailtrap_enabled', false)) {
+			$phpmailer->IsSMTP();
+			$phpmailer->Host = 'smtp.mailtrap.io';
+			// $phpmailer->Host = 'sandbox.smtp.mailtrap.io';
+			$phpmailer->SMTPAuth = true;
+			$phpmailer->Port = 2525;
+			// $phpmailer->Port = get_option('mailtrap_port');
+			$phpmailer->Username = get_option('mailtrap_username');
+			$phpmailer->Password = get_option('mailtrap_password');
+			// $phpmailer->SMTPSecure = get_option('mailtrap_secure');
+		}
+	}
 }

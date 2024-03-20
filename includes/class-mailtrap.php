@@ -115,6 +115,8 @@ class Mailtrap {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-mailtrap-admin.php';
 
+		$this->loader = new Mailtrap_Loader();
+
 	}
 
 	/**
@@ -147,6 +149,11 @@ class Mailtrap {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'mailtrap_menu' );
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'enqueue_scripts' );
+
+		$this->loader->add_action( 'phpmailer_init', $plugin_admin, 'mailtrap' );
 
 	}
 
