@@ -8,15 +8,15 @@
                 <?php
                 $current_message = null;
                 $message_body = '<p style="text-align:center">No messages found</p>';
-                $messages = MailtrapAPIClient::getInboxMessages($_GET['inbox_id']);
+                $messages = Mailtrap_API::getInboxMessages($_GET['inbox_id']);
 
                 if (array_key_exists('message_id', $_GET) && !empty ($_GET['message_id'])) {
-                    $current_message = MailtrapAPIClient::getMessage($_GET['inbox_id'], $_GET['message_id']);
-                    $message_body = MailtrapAPIClient::getMessageBody($_GET['inbox_id'], $_GET['message_id']);
+                    $current_message = Mailtrap_API::getMessage($_GET['inbox_id'], $_GET['message_id']);
+                    $message_body = Mailtrap_API::getMessageBody($_GET['inbox_id'], $_GET['message_id']);
                 } else {
                     if (count($messages) > 0) {
                         $current_message = $messages[0];
-                        $message_body = MailtrapAPIClient::getMessageBody($_GET['inbox_id'], $current_message->id);
+                        $message_body = Mailtrap_API::getMessageBody($_GET['inbox_id'], $current_message->id);
                     }
                 }
 
@@ -41,7 +41,7 @@
                                             <?php echo $message->to_email ?>
                                         </span>
                                         <span style="font-size:0.6rem;flex-shrink: 0;">
-                                            <?php echo MailtrapAPIClient::time2str($message->sent_at) ?>
+                                            <?php echo Mailtrap_API::time2str($message->sent_at) ?>
                                         </span>
                                     </p>
                                 </li>
@@ -75,7 +75,7 @@
 
             <?php else: ?>
 
-                <?php $inboxes = MailtrapAPIClient::getInboxes(); ?>
+                <?php $inboxes = Mailtrap_API::getInboxes(); ?>
 
                 <h3>Inboxes</h3>
 
@@ -106,7 +106,7 @@
                                     <?php echo $inbox->max_size ?>
                                 </td>
                                 <td>
-                                    <?php echo MailtrapAPIClient::time2str($inbox->last_message_sent_at) ?>
+                                    <?php echo Mailtrap_API::time2str($inbox->last_message_sent_at) ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

@@ -32,18 +32,17 @@ class Mailtrap_API {
         ]);
 
         if (is_array($response) && !is_wp_error($response)) {
-            $http_code = $response['response']['code'];
-
-            if ($http_code != 200) {
-                throw new Exception($response['response']['message'], $http_code);
+            if (200 != $response['response']['code']) {
+                throw new Exception($response['response']['message'], $response['response']['code']);
             }
 
-            $body = json_decode($response['body']);
-            return $body;
+            return json_decode($response['body']);
         }
     }
 
     public static function getInboxMessages($id) {
+        // print_r($id);
+        $id = get_option('mailtrap_inbox_id');
         $response = wp_remote_get(self::BASE_URL . '/inboxes/' . $id . '/messages', [
             'headers' => [
                 'Api-Token' => get_option('mailtrap_api_token')
@@ -51,14 +50,11 @@ class Mailtrap_API {
         ]);
 
         if (is_array($response) && !is_wp_error($response)) {
-            $http_code = $response['response']['code'];
-
-            if ($http_code != 200) {
-                throw new Exception($response['response']['message'], $http_code);
+            if (200 != $response['response']['code']) {
+                throw new Exception($response['response']['message'], $response['response']['code']);
             }
 
-            $body = json_decode($response['body']);
-            return $body;
+            return json_decode($response['body']);
         }
     }
 
@@ -70,14 +66,11 @@ class Mailtrap_API {
         ]);
 
         if (is_array($response) && !is_wp_error($response)) {
-            $http_code = $response['response']['code'];
-
-            if ($http_code != 200) {
-                throw new Exception($response['response']['message'], $http_code);
+            if (200 != $response['response']['code']) {
+                throw new Exception($response['response']['message'], $response['response']['code']);
             }
 
-            $body = json_decode($response['body']);
-            return $body;
+            return json_decode($response['body']);
         }
     }
 
@@ -89,13 +82,11 @@ class Mailtrap_API {
         ]);
 
         if (is_array($response) && !is_wp_error($response)) {
-            $http_code = $response['response']['code'];
-
-            if ($http_code != 200 && $http_code != 404) {
-                throw new Exception($response['response']['message'], $http_code);
+            if (200 != $response['response']['code'] && 404 != $response['response']['code']) {
+                throw new Exception($response['response']['message'], $response['response']['code']);
             }
 
-            if ($http_code == 404) {
+            if (404 != $response['response']['code']) {
                 return self::getMessageBody($inbox_id, $message_id, 'txt');
             }
             return $response['body'];

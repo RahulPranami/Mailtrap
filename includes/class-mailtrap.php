@@ -111,6 +111,12 @@ class Mailtrap {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-mailtrap-i18n.php';
 
 		/**
+		 * The class responsible for defining internationalization functionality
+		 * of the plugin.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-mailtrap-api.php';
+
+		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-mailtrap-admin.php';
@@ -151,7 +157,7 @@ class Mailtrap {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'mailtrap_menu' );
-		$this->loader->add_action( 'admin_init', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'register_settings' );
 
 		$this->loader->add_action( 'phpmailer_init', $plugin_admin, 'mailtrap' );
 
