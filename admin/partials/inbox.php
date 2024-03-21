@@ -8,23 +8,21 @@
                 <?php
                 $current_message = null;
                 $message_body = '<p style="text-align:center">No messages found</p>';
-                $messages = Mailtrap_API::getInboxMessages(get_option('mailtrap_inbox_id'));
+                $messages = Mailtrap_API::getInboxMessages();
 
                 if (array_key_exists('message_id', $_GET) && !empty ($_GET['message_id'])) {
-                    $current_message = Mailtrap_API::getMessage(get_option('mailtrap_inbox_id'), $_GET['message_id']);
-                    $message_body = Mailtrap_API::getMessageBody(get_option('mailtrap_inbox_id'), $_GET['message_id']);
+                    $current_message = Mailtrap_API::getMessage($_GET['message_id']);
+                    $message_body = Mailtrap_API::getMessageBody($_GET['message_id']);
                 } else {
                     if (count($messages) > 0) {
                         $current_message = $messages[0];
-                        $message_body = Mailtrap_API::getMessageBody(get_option('mailtrap_inbox_id'), $current_message->id);
+                        $message_body = Mailtrap_API::getMessageBody($current_message->id);
                     }
                 }
 
                 ?>
 
-                <h3 style="background: #fff; margin-bottom:0; padding: 20px;border:1px solid #eee">Inbox View </h3>
-
-                <div style="display: flex;align-items: stretch;">
+                <div>
                     <?php if (count($messages) > 0): ?>
                         <ul style="flex-basis: 30%;background: #fff; margin:0; flex-shrink: 0;">
                             <?php foreach ($messages as $message): ?>
@@ -32,7 +30,7 @@
                                 <li
                                     style="<?php echo $is_current_item ? 'background: #00b08c;' : ($message->is_read ? 'background: #eee;' : '') ?>display:flex; flex-direction: column; padding: 15px 10px 5px 20px; border-bottom: 1px solid #eee;margin:0;">
                                     <a style="<?php echo $is_current_item ? 'color: #fff;' : 'color: #292929;' ?><?php echo !$message->is_read ? 'font-weight: bold' : '' ?>;font-size:0.9rem;margin-bottom:1px;text-decoration:none"
-                                        href="<?php echo admin_url('admin.php?page=mailtrap-inbox&inbox_id=' . $message->inbox_id . '&message_id=' . $message->id); ?>">
+                                        href="<?php echo admin_url('admin.php?page=mailtrap-inbox&message_id=' . $message->id); ?>">
                                         <?php echo $message->subject ?>
                                     </a>
                                     <p
