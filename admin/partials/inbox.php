@@ -3,20 +3,20 @@
 
     <div style="padding: 20px 5px">
         <?php try { ?>
-            <?php if (array_key_exists('inbox_id', $_GET) && !empty ($_GET['inbox_id'])): ?>
+            <?php if (get_option('mailtrap_inbox_id')): ?>
 
                 <?php
                 $current_message = null;
                 $message_body = '<p style="text-align:center">No messages found</p>';
-                $messages = Mailtrap_API::getInboxMessages($_GET['inbox_id']);
+                $messages = Mailtrap_API::getInboxMessages(get_option('mailtrap_inbox_id'));
 
                 if (array_key_exists('message_id', $_GET) && !empty ($_GET['message_id'])) {
-                    $current_message = Mailtrap_API::getMessage($_GET['inbox_id'], $_GET['message_id']);
-                    $message_body = Mailtrap_API::getMessageBody($_GET['inbox_id'], $_GET['message_id']);
+                    $current_message = Mailtrap_API::getMessage(get_option('mailtrap_inbox_id'), $_GET['message_id']);
+                    $message_body = Mailtrap_API::getMessageBody(get_option('mailtrap_inbox_id'), $_GET['message_id']);
                 } else {
                     if (count($messages) > 0) {
                         $current_message = $messages[0];
-                        $message_body = Mailtrap_API::getMessageBody($_GET['inbox_id'], $current_message->id);
+                        $message_body = Mailtrap_API::getMessageBody(get_option('mailtrap_inbox_id'), $current_message->id);
                     }
                 }
 
@@ -72,46 +72,6 @@
                         <?php echo $message_body ?>
                     </div>
                 </div>
-
-            <?php else: ?>
-
-                <?php $inboxes = Mailtrap_API::getInboxes(); ?>
-
-                <h3>Inboxes</h3>
-
-                <table class="wp-list-table widefat fixed striped table-view-list posts">
-                    <thead>
-                        <tr>
-                            <th>Inbox</th>
-                            <th>Total Sent</th>
-                            <th>Messages</th>
-                            <th>Max Size</th>
-                            <th>Last message</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($inboxes as $inbox): ?>
-                            <tr>
-                                <td><a href="<?php echo admin_url('admin.php?page=mailtrap-inbox&inbox_id=' . $inbox->id); ?>">
-                                        <?php echo $inbox->name ?>
-                                    </a></td>
-                                <td>
-                                    <?php echo $inbox->sent_messages_count ?>
-                                </td>
-                                <td>
-                                    <?php echo $inbox->emails_unread_count ?>/
-                                    <?php echo $inbox->emails_count ?>
-                                </td>
-                                <td>
-                                    <?php echo $inbox->max_size ?>
-                                </td>
-                                <td>
-                                    <?php echo Mailtrap_API::time2str($inbox->last_message_sent_at) ?>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
 
             <?php endif; ?>
         <?php } catch (Exception $e) { ?>
