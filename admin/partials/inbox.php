@@ -42,6 +42,31 @@
                                             <?php echo Mailtrap_API::time2str($message->sent_at) ?>
                                         </span>
                                     </p>
+                                    <?php if ($is_current_item): ?>
+                                        <div
+                                            style="flex:1 1 auto;background: #fff; border-left: 1px solid #eee; padding: 10px 20px 20px 20px;">
+
+                                            <?php if ($current_message): ?>
+                                                <div style="border-bottom:1px solid #ccc;margin-bottom:25px">
+                                                    <h2 style="font-size:1.5rem">
+                                                        <?php echo $current_message->subject ?> <small style="font-size: 0.7rem; float: right">
+                                                            <?php echo date('Y-m-d H:i', strtotime($current_message->sent_at)) ?>
+                                                        </small>
+                                                    </h2>
+                                                    <p>
+                                                        From:
+                                                        <?php echo $current_message->from_name ?> &lt;
+                                                        <?php echo $current_message->from_email ?>&gt; <br>
+                                                        To:
+                                                        <?php echo $current_message->to_name ?> &lt;
+                                                        <?php echo $current_message->to_email ?>&gt;
+                                                    </p>
+                                                </div>
+                                            <?php endif; ?>
+
+                                            <?php echo $message_body ?>
+                                        </div>
+                                    <?php endif; ?>
                                 </li>
                             <?php endforeach; ?>
                         </ul>
