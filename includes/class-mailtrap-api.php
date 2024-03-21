@@ -24,8 +24,8 @@ class Mailtrap_API {
 
     const BASE_URL = 'https://mailtrap.io/api/v1';
 
-    public static function getInboxes() {
-        $response = wp_remote_get(self::BASE_URL . '/inboxes', [
+    public static function getInboxMessages() {
+        $response = wp_remote_get(self::BASE_URL . '/inboxes/' . get_option('mailtrap_inbox_id') . '/messages', [
             'headers' => [
                 'Api-Token' => get_option('mailtrap_api_token')
             ]
@@ -40,10 +40,8 @@ class Mailtrap_API {
         }
     }
 
-    public static function getInboxMessages($id) {
-        // print_r($id);
-        $id = get_option('mailtrap_inbox_id');
-        $response = wp_remote_get(self::BASE_URL . '/inboxes/' . $id . '/messages', [
+    public static function getMessage($message_id) {
+        $response = wp_remote_get(self::BASE_URL . '/inboxes/' . get_option('mailtrap_inbox_id') . '/messages/' . $message_id, [
             'headers' => [
                 'Api-Token' => get_option('mailtrap_api_token')
             ]
@@ -58,24 +56,8 @@ class Mailtrap_API {
         }
     }
 
-    public static function getMessage($inbox_id, $message_id) {
-        $response = wp_remote_get(self::BASE_URL . '/inboxes/' . $inbox_id . '/messages/' . $message_id, [
-            'headers' => [
-                'Api-Token' => get_option('mailtrap_api_token')
-            ]
-        ]);
-
-        if (is_array($response) && !is_wp_error($response)) {
-            if (200 != $response['response']['code']) {
-                throw new Exception($response['response']['message'], $response['response']['code']);
-            }
-
-            return json_decode($response['body']);
-        }
-    }
-
-    public static function getMessageBody($inbox_id, $message_id, $format = 'html') {
-        $response = wp_remote_get(self::BASE_URL . '/inboxes/' . $inbox_id . '/messages/' . $message_id . '/body.' . $format, [
+    public static function getMessageBody($message_id, $format = 'html') {
+        $response = wp_remote_get(self::BASE_URL . '/inboxes/' . get_option('mailtrap_inbox_id') . '/messages/' . $message_id . '/body.' . $format, [
             'headers' => [
                 'Api-Token' => get_option('mailtrap_api_token')
             ]
@@ -87,7 +69,7 @@ class Mailtrap_API {
             }
 
             if (404 != $response['response']['code']) {
-                return self::getMessageBody($inbox_id, $message_id, 'txt');
+                return self::getMessageBody(get_option('mailtrap_inbox_id'), $message_id, 'txt');
             }
             return $response['body'];
         }
