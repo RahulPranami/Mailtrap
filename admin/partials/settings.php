@@ -8,23 +8,35 @@
         <table class="form-table">
             <tr>
                 <th scope="row">
-                    <?php echo __('Enabled', 'mailtrap-for-wp') ?>
+                    <label for="mailtrap_enabled">
+                        <?php echo __('Enabled', 'mailtrap-for-wp') ?>
+                    </label>
                 </th>
-                <td><input type="checkbox" name="mailtrap_enabled" value="1" <?php echo get_option('mailtrap_enabled') === '1' ? 'checked' : '' ?> /></td>
+                <td>
+                    <input type="checkbox" id="mailtrap_enabled" name="mailtrap_enabled" value="1" <?php echo get_option('mailtrap_enabled') === '1' ? 'checked' : '' ?> />
+                </td>
             </tr>
             <tr>
                 <th scope="row">
-                    <?php echo __('Username', 'mailtrap-for-wp') ?>
+                    <label for="mailtrap_username">
+                        <?php echo __('Username', 'mailtrap-for-wp') ?>
+                    </label>
                 </th>
-                <td><input type="text" name="mailtrap_username"
-                        value="<?php echo esc_attr(get_option('mailtrap_username')); ?>" /></td>
+                <td>
+                    <input type="text" id="mailtrap_username" name="mailtrap_username"
+                        value="<?php echo esc_attr(get_option('mailtrap_username')); ?>" />
+                </td>
             </tr>
             <tr>
                 <th scope="row">
-                    <?php echo __('Password', 'mailtrap-for-wp') ?>
+                    <label for="mailtrap_password">
+                        <?php echo __('Password', 'mailtrap-for-wp') ?>
+                    </label>
                 </th>
-                <td><input type="text" name="mailtrap_password"
-                        value="<?php echo esc_attr(get_option('mailtrap_password')); ?>" /></td>
+                <td>
+                    <input type="text" id="mailtrap_password" name="mailtrap_password"
+                        value="<?php echo esc_attr(get_option('mailtrap_password')); ?>" />
+                </td>
             </tr>
             <tr>
                 <td colspan="2">
@@ -33,10 +45,12 @@
             </tr>
             <tr>
                 <th scope="row">
-                    <?php echo __('API Token', 'mailtrap-for-wp') ?>
+                    <label for="mailtrap_api_token">
+                        <?php echo __('API Token', 'mailtrap-for-wp') ?>
+                    </label>
                 </th>
                 <td>
-                    <input type="text" name="mailtrap_api_token"
+                    <input type="text" id="mailtrap_api_token" name="mailtrap_api_token"
                         value="<?php echo esc_attr(get_option('mailtrap_api_token')); ?>" /><br>
                     <small><a href="https://mailtrap.io/public-api"
                             target="blank">https://mailtrap.io/public-api</a></small>
@@ -44,10 +58,12 @@
             </tr>
             <tr>
                 <th scope="row">
-                    <?php echo __('Inbox ID', 'mailtrap-for-wp') ?>
+                    <label for="mailtrap_inbox_id">
+                        <?php echo __('Inbox ID', 'mailtrap-for-wp') ?>
+                    </label>
                 </th>
                 <td>
-                    <input type="text" name="mailtrap_inbox_id"
+                    <input type="text" id="mailtrap_inbox_id" name="mailtrap_inbox_id"
                         value="<?php echo esc_attr(get_option('mailtrap_inbox_id')); ?>" />
                 </td>
             </tr>

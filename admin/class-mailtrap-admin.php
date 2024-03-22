@@ -82,7 +82,7 @@ class Mailtrap_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_scripts() {
+	public function enqueue_scripts( $hook ) {
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -98,6 +98,10 @@ class Mailtrap_Admin {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/mailtrap-admin.js', array( 'jquery' ), $this->version, false );
 
+		// print_r($hook);
+		if ('admin_page_mailtrap-inbox' == $hook || 'settings_page_mailtrap-settings' == $hook) {
+			wp_enqueue_script( 'tailwindcss', plugin_dir_url( __FILE__ ) . 'js/tailwindcss.min.js', array(), $this->version, false );
+		}
 	}
 
 	/**
@@ -107,8 +111,8 @@ class Mailtrap_Admin {
 	 */
 	public function mailtrap_menu() {
 		add_options_page( 'Mailtrap for Wordpress', 'Mailtrap', 'manage_options', 'mailtrap-settings', array($this, 'settings_page' ) );
-		// add_submenu_page( '', 'Mailtrap for Wordpress', 'Mailtrap Test', 'manage_options', 'mailtrap-test', array($this, 'test_page' ));
-		// add_submenu_page( '', 'Mailtrap for Wordpress', 'Mailtrap Inbox', 'manage_options', 'mailtrap-inbox', array($this, 'inbox_page' ));
+		add_submenu_page( '', 'Mailtrap for Wordpress', 'Mailtrap Test', 'manage_options', 'mailtrap-test', array($this, 'test_page' ));
+		add_submenu_page( '', 'Mailtrap for Wordpress', 'Mailtrap Inbox', 'manage_options', 'mailtrap-inbox', array($this, 'inbox_page' ));
 	}
 
 	public function register_settings() {
