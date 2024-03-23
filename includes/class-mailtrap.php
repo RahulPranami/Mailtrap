@@ -161,6 +161,10 @@ class Mailtrap {
 
 		$this->loader->add_action( 'phpmailer_init', $plugin_admin, 'mailtrap' );
 
+		$this->loader->add_action( 'wp_mail_failed', $plugin_admin, 'wp_mail_failed', 99, 1 );
+		$this->loader->add_filter( 'wp_mail_from', $plugin_admin, 'filter_mail_from' );
+		$this->loader->add_filter( 'wp_mail_from_name', $plugin_admin, 'filter_mail_from_name' );
+
 	}
 
 	/**

@@ -14,3 +14,15 @@
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
+
+<div class="wrap">
+    <?php
+    if ('mailtrap' === $_GET['page']) {
+        include_once 'mailtrap/index.php';
+    } else if ('mailtrap-test' === $_GET['page']) {
+        include_once 'mailtrap/test.php';
+    } else if ('mailtrap-inbox' === $_GET['page']) {
+        include_once 'mailtrap/inbox.php';
+    }
+    ?>
+</div>

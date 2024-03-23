@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .min-h-screen-wp {
+    min-height: calc(100vh - 32px - 40px - 10px);
+  }
+}
+
+#wpwrap {
+  /* background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuZGV2L3N2Z2pzIiB2aWV3Qm94PSIwIDAgODAwIDgwMCIgd2lkdGg9IjgwMCIgaGVpZ2h0PSI4MDAiPjxkZWZzPjxwYXR0ZXJuIGlkPSJtbW1vdGlmLXBhdHRlcm4iIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgcGF0dGVyblRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMCkgc2NhbGUoMSkgcm90YXRlKDQ1KSBza2V3WCgwKSBza2V3WSgwKSI+CiAgICA8cmVjdCB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHRyYW5zZm9ybT0ibWF0cml4KDAuODY2MDI1IDAuNSAtMC44NjYwMjUgMC41IDIwIDIpIiBmaWxsPSJoc2woMjEyLCA5MSUsIDU1JSkiPjwvcmVjdD4KICAgIDxyZWN0IHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdHJhbnNmb3JtPSJtYXRyaXgoMC44NjYwMjUgMC41IC0yLjIwMzA1ZS0wOCAxIDQuNDExNjIgMTEpIiBmaWxsPSIjNzBiNGZmIj48L3JlY3Q+CiAgICA8cmVjdCB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHRyYW5zZm9ybT0ibWF0cml4KDAuODY2MDI1IC0wLjUgMi4yMDMwNWUtMDggMSAyMCAyMCkiIGZpbGw9IiMwMDU5YzEiPjwvcmVjdD4KPC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjgwMCIgZmlsbD0idXJsKCNtbW1vdGlmLXBhdHRlcm4pIj48L3JlY3Q+PC9zdmc+"); */
+  /* background-size: cover; */
+}
+
+.wrap {
+  @apply min-h-screen-wp;
+}
+
+#wpbody-content {
+  @apply pb-10;
+}
+
+#mailtrap-form {
+  @apply bg-white;
+  @apply rounded-lg shadow-sm px-4 w-fit h-fit;
+  @apply shadow-lg drop-shadow-lg;
+  @apply border border-slate-600;
+}
+
+#mailtrap-form h3 {
+  @apply mt-4;
+  @apply text-2xl;
+  @apply font-bold;
+  @apply text-center;
+  @apply pb-4 border-b-2 border-b-slate-400;
+}
+
+#mailtrap-form tr {
+  @apply flex items-center;
+}
+
+#mailtrap-form .form-table td {
+  @apply mb-0 p-0;
+}
+
+#mailtrap-form label {
+  @apply text-base text-slate-600;
+}
+
+#mailtrap-form input[type="checkbox"] {
+  @apply form-checkbox w-5 h-5;
+  @apply rounded-md;
+}
+
+#mailtrap-form input[type="text"],
+#mailtrap-form input[type="password"] {
+  @apply form-input px-4 py-3;
+  @apply w-80;
+  @apply rounded-md;
+}
+
+#mailtrap-form input[type="email"] {
+  @apply form-input;
+}
+
+#mailtrap-form textarea {
+  @apply form-textarea;
+}
+
+#mailtrap-form input[type="email"],
+#mailtrap-form textarea {
+  @apply px-4 py-3;
+  @apply w-96;
+  @apply rounded-md;
+}
+
+#mailtrap-form #submit_btn {
+  @apply bg-blue-500 hover:bg-blue-700 text-white;
+  @apply rounded-md text-lg transition-colors px-4 py-2;
+  @apply w-full;
+  @apply shadow-sm;
+}
+
+.notice p {
+  @apply m-0 p-0;
+}
+
+.wrap .notice {
+  @apply mb-0;
+}
+
+.notice-error,
+.notice-warning,
+.notice-info,
+.notice-success {
+  @apply border px-4 py-3 rounded relative mb-4;
+}
+
+.notice-error {
+  @apply bg-red-100 border-red-400 text-red-700;
+}
+
+.notice-warning {
+  @apply bg-yellow-100 border-yellow-400 text-yellow-700;
+}
+
+.notice-info {
+  @apply bg-blue-100 border-blue-400 text-blue-700;
+}
+
+.notice-success {
+  @apply bg-green-100 border-green-400 text-green-700;
+}
