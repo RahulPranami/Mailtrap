@@ -77,6 +77,5 @@ function run_mailtrap() {
 
 	$plugin = new Mailtrap();
 	$plugin->run();
-
 }
 run_mailtrap();

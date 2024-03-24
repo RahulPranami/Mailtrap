@@ -3,133 +3,133 @@
 @tailwind utilities;
 
 @layer utilities {
-  .min-h-screen-wp {
-    min-height: calc(100vh - 32px - 40px - 10px);
-  }
+	.min-h-screen-wp {
+	min-height: calc(100vh - 32px - 40px - 10px);
+	}
 }
 
 .wrap {
-  @apply min-h-screen-wp;
+	@apply min-h-screen-wp;
 }
 
 #wpbody-content {
-  @apply pb-10;
+	@apply pb-10;
 }
 
 #mailtrap-form,
 #mailtrap-inbox {
-  @apply bg-white;
-  @apply rounded-lg shadow-sm px-4 w-fit h-fit;
-  @apply shadow-lg drop-shadow-lg;
-  @apply border border-slate-600;
+	@apply bg-white;
+	@apply rounded-lg shadow-sm px-4 w-fit h-fit;
+	@apply shadow-lg drop-shadow-lg;
+	@apply border border-slate-600;
 }
 
 #mailtrap-inbox h3,
 #mailtrap-form h3 {
-  @apply mt-4;
-  @apply text-2xl;
-  @apply font-bold;
-  @apply text-center;
-  @apply pb-4 border-b-2 border-b-slate-400;
+	@apply mt-4;
+	@apply text-2xl;
+	@apply font-bold;
+	@apply text-center;
+	@apply pb-4 border-b-2 border-b-slate-400;
 }
 
 #mailtrap-form tr {
-  @apply flex items-center;
+	@apply flex items-center;
 }
 
 #mailtrap-form .form-table td {
-  @apply mb-0 p-0;
+	@apply mb-0 p-0;
 }
 
 #mailtrap-form label {
-  @apply text-base text-slate-600;
+	@apply text-base text-slate-600;
 }
 
 #mailtrap-form input[type="checkbox"] {
-  @apply form-checkbox w-5 h-5;
-  @apply rounded-md;
+	@apply form-checkbox w-5 h-5;
+	@apply rounded-md;
 }
 
 #mailtrap-form input[type="text"],
 #mailtrap-form input[type="password"] {
-  @apply form-input px-4 py-3;
-  @apply w-80;
-  @apply rounded-md;
+	@apply form-input px-4 py-3;
+	@apply w-80;
+	@apply rounded-md;
 }
 
 #mailtrap-form input[type="email"] {
-  @apply form-input;
+	@apply form-input;
 }
 
 #mailtrap-form textarea {
-  @apply form-textarea;
+	@apply form-textarea;
 }
 
 #mailtrap-form input[type="email"],
 #mailtrap-form textarea {
-  @apply px-4 py-3;
-  @apply w-96;
-  @apply rounded-md;
+	@apply px-4 py-3;
+	@apply w-96;
+	@apply rounded-md;
 }
 
 #mailtrap-form #submit_btn {
-  @apply bg-blue-500 hover:bg-blue-700 text-white;
-  @apply rounded-md text-lg transition-colors px-4 py-2;
-  @apply w-full;
-  @apply shadow-sm;
+	@apply bg-blue-500 hover:bg-blue-700 text-white;
+	@apply rounded-md text-lg transition-colors px-4 py-2;
+	@apply w-full;
+	@apply shadow-sm;
 }
 
 .notice p {
-  @apply m-0 p-0;
+	@apply m-0 p-0;
 }
 
 .wrap .notice {
-  @apply mb-0;
+	@apply mb-0;
 }
 
 .notice-error,
 .notice-warning,
 .notice-info,
 .notice-success {
-  @apply border px-4 py-3 rounded relative mb-4;
+	@apply border px-4 py-3 rounded relative mb-4;
 }
 
 .notice-error {
-  @apply bg-red-100 border-red-400 text-red-700;
+	@apply bg-red-100 border-red-400 text-red-700;
 }
 
 .notice-warning {
-  @apply bg-yellow-100 border-yellow-400 text-yellow-700;
+	@apply bg-yellow-100 border-yellow-400 text-yellow-700;
 }
 
 .notice-info {
-  @apply bg-blue-100 border-blue-400 text-blue-700;
+	@apply bg-blue-100 border-blue-400 text-blue-700;
 }
 
 .notice-success {
-  @apply bg-green-100 border-green-400 text-green-700;
+	@apply bg-green-100 border-green-400 text-green-700;
 }
 
 #mailtrap-inbox ul li {
-  @apply rounded-md shadow-md;
+	@apply rounded-md shadow-md;
 }
 
 #mailtrap-inbox li.active {
-  @apply bg-emerald-600 text-white;
+	@apply bg-emerald-600 text-white;
 }
 
 #mailtrap-inbox li:not(.active) {
-  @apply text-gray-900;
+	@apply text-gray-900;
 }
 
 #mailtrap-inbox li:not(.active).read:not(:hover) {
-  @apply bg-gray-200;
+	@apply bg-gray-200;
 }
 
 #mailtrap-inbox li:not(.read) {
-  @apply font-bold;
+	@apply font-bold;
 }
 
 #mailtrap-inbox ul li:hover {
-  @apply bg-slate-500 text-white transition-colors cursor-pointer;
+	@apply bg-slate-500 text-white transition-colors cursor-pointer;
 }

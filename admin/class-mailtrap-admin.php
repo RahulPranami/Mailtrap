@@ -44,14 +44,13 @@ class Mailtrap_Admin {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
-	 * @param      string    $plugin_name       The name of this plugin.
-	 * @param      string    $version    The version of this plugin.
+	 * @param      string $plugin_name       The name of this plugin.
+	 * @param      string $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
-
+		$this->version     = $version;
 	}
 
 	/**
@@ -75,11 +74,10 @@ class Mailtrap_Admin {
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/mailtrap-admin.css', array(), $this->version, 'all' );
 
-		if ('mailtrap_page_mailtrap-inbox' === $hook || 'toplevel_page_mailtrap' === $hook || 'mailtrap_page_mailtrap-test' === $hook) {
+		if ( 'mailtrap_page_mailtrap-inbox' === $hook || 'toplevel_page_mailtrap' === $hook || 'mailtrap_page_mailtrap-test' === $hook ) {
 			// wp_enqueue_style( 'tailwindcss', plugin_dir_url( __FILE__ ) . 'css/output.css', array(), microtime(), 'all' );
 			wp_enqueue_style( 'tailwindcss-min', plugin_dir_url( __FILE__ ) . 'css/output.min.css' );
 		}
-
 	}
 
 	/**
@@ -102,7 +100,6 @@ class Mailtrap_Admin {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/mailtrap-admin.js', array( 'jquery' ), $this->version, false );
-
 	}
 
 	/**
@@ -111,49 +108,49 @@ class Mailtrap_Admin {
 	 * @since    1.0.0
 	 */
 	public function mailtrap_menu() {
-		add_menu_page('Mailtrap Settings', 'Mailtrap', 'manage_options', 'mailtrap', [$this, 'mailtrap_page']);
-		add_submenu_page('mailtrap', 'Mailtrap Test', 'Test', 'manage_options', 'mailtrap-test', [$this, 'mailtrap_page']);
-		add_submenu_page('mailtrap', 'Mailtrap Inbox', 'Inbox', 'manage_options', 'mailtrap-inbox', [$this, 'mailtrap_page']);
+		add_menu_page( 'Mailtrap Settings', 'Mailtrap', 'manage_options', 'mailtrap', array( $this, 'mailtrap_page' ) );
+		add_submenu_page( 'mailtrap', 'Mailtrap Test', 'Test', 'manage_options', 'mailtrap-test', array( $this, 'mailtrap_page' ) );
+		add_submenu_page( 'mailtrap', 'Mailtrap Inbox', 'Inbox', 'manage_options', 'mailtrap-inbox', array( $this, 'mailtrap_page' ) );
 	}
 
 	public function register_settings() {
-		register_setting('mailtrap-settings', 'mailtrap_enabled');
-		register_setting('mailtrap-settings', 'mailtrap_username');
-		register_setting('mailtrap-settings', 'mailtrap_password');
+		register_setting( 'mailtrap-settings', 'mailtrap_enabled' );
+		register_setting( 'mailtrap-settings', 'mailtrap_username' );
+		register_setting( 'mailtrap-settings', 'mailtrap_password' );
 
-		register_setting('mailtrap-settings', 'mailtrap_api_token');
-		register_setting('mailtrap-settings', 'mailtrap_inbox_id');
+		register_setting( 'mailtrap-settings', 'mailtrap_api_token' );
+		register_setting( 'mailtrap-settings', 'mailtrap_inbox_id' );
 	}
 
 	public function mailtrap_page() {
 		include plugin_dir_path( __FILE__ ) . '/partials/mailtrap-admin-display.php';
 	}
 
-	public function mailtrap($phpmailer) {
-		if (get_option('mailtrap_enabled', false)) {
+	public function mailtrap( $phpmailer ) {
+		if ( get_option( 'mailtrap_enabled', false ) ) {
 			$phpmailer->IsSMTP();
 			$phpmailer->Host = 'smtp.mailtrap.io';
 			// $phpmailer->Host = 'sandbox.smtp.mailtrap.io';
 			$phpmailer->SMTPAuth = true;
-			$phpmailer->Port = 2525;
-			$phpmailer->Username = get_option('mailtrap_username');
-			$phpmailer->Password = get_option('mailtrap_password');
+			$phpmailer->Port     = 2525;
+			$phpmailer->Username = get_option( 'mailtrap_username' );
+			$phpmailer->Password = get_option( 'mailtrap_password' );
 			// $phpmailer->SMTPSecure = get_option('mailtrap_secure');
 		}
 	}
 
-	public function wp_mail_failed($wp_error) {
-		echo sprintf(
+	public function wp_mail_failed( $wp_error ) {
+		printf(
 			'<div class="notice notice-error"><p>%s</p></div>',
-			__('Email Delivery Failure:') . $wp_error->get_error_message()
+			__( 'Email Delivery Failure:' ) . $wp_error->get_error_message()
 		);
 	}
 
-	public function filter_mail_from($value) {
-		return get_option('admin_email');
+	public function filter_mail_from( $value ) {
+		return get_option( 'admin_email' );
 	}
 
-	public function filter_mail_from_name($value) {
-		return get_option('blogname');
+	public function filter_mail_from_name( $value ) {
+		return get_option( 'blogname' );
 	}
 }

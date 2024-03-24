@@ -77,7 +77,6 @@ class Mailtrap {
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
-
 	}
 
 	/**
@@ -102,27 +101,26 @@ class Mailtrap {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-mailtrap-loader.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-mailtrap-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-mailtrap-i18n.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-mailtrap-i18n.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-mailtrap-api.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-mailtrap-api.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-mailtrap-admin.php';
+		require_once plugin_dir_path( __DIR__ ) . 'admin/class-mailtrap-admin.php';
 
 		$this->loader = new Mailtrap_Loader();
-
 	}
 
 	/**
@@ -139,7 +137,6 @@ class Mailtrap {
 		$plugin_i18n = new Mailtrap_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
 	}
 
 	/**
@@ -164,7 +161,6 @@ class Mailtrap {
 		$this->loader->add_action( 'wp_mail_failed', $plugin_admin, 'wp_mail_failed', 99, 1 );
 		$this->loader->add_filter( 'wp_mail_from', $plugin_admin, 'filter_mail_from' );
 		$this->loader->add_filter( 'wp_mail_from_name', $plugin_admin, 'filter_mail_from_name' );
-
 	}
 
 	/**
@@ -206,5 +202,4 @@ class Mailtrap {
 	public function get_version() {
 		return $this->version;
 	}
-
 }
