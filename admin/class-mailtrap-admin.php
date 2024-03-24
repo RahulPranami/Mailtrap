@@ -76,8 +76,8 @@ class Mailtrap_Admin {
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/mailtrap-admin.css', array(), $this->version, 'all' );
 
 		if ('mailtrap_page_mailtrap-inbox' === $hook || 'toplevel_page_mailtrap' === $hook || 'mailtrap_page_mailtrap-test' === $hook) {
-			wp_enqueue_style( 'tailwindcss', plugin_dir_url( __FILE__ ) . 'css/output.css', array(), microtime(), 'all' );
-			// wp_enqueue_style( 'tailwindcss-min', plugin_dir_url( __FILE__ ) . 'css/output.min.css');
+			// wp_enqueue_style( 'tailwindcss', plugin_dir_url( __FILE__ ) . 'css/output.css', array(), microtime(), 'all' );
+			wp_enqueue_style( 'tailwindcss-min', plugin_dir_url( __FILE__ ) . 'css/output.min.css' );
 		}
 
 	}
@@ -103,10 +103,6 @@ class Mailtrap_Admin {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/mailtrap-admin.js', array( 'jquery' ), $this->version, false );
 
-		// print_r($hook);
-		if ('admin_page_mailtrap-inbox' == $hook || 'settings_page_mailtrap-settings' == $hook) {
-			wp_enqueue_script( 'tailwindcss', plugin_dir_url( __FILE__ ) . 'js/tailwindcss.min.js', array(), $this->version, false );
-		}
 	}
 
 	/**
@@ -115,10 +111,6 @@ class Mailtrap_Admin {
 	 * @since    1.0.0
 	 */
 	public function mailtrap_menu() {
-		// add_options_page( 'Mailtrap for Wordpress', 'Mailtrap', 'manage_options', 'mailtrap-settings', array($this, 'settings_page' ) );
-		// add_submenu_page( '', 'Mailtrap for Wordpress', 'Mailtrap Test', 'manage_options', 'mailtrap-test', array($this, 'test_page' ));
-		// add_submenu_page( '', 'Mailtrap for Wordpress', 'Mailtrap Inbox', 'manage_options', 'mailtrap-inbox', array($this, 'inbox_page' ));
-
 		add_menu_page('Mailtrap Settings', 'Mailtrap', 'manage_options', 'mailtrap', [$this, 'mailtrap_page']);
 		add_submenu_page('mailtrap', 'Mailtrap Test', 'Test', 'manage_options', 'mailtrap-test', [$this, 'mailtrap_page']);
 		add_submenu_page('mailtrap', 'Mailtrap Inbox', 'Inbox', 'manage_options', 'mailtrap-inbox', [$this, 'mailtrap_page']);
@@ -137,20 +129,6 @@ class Mailtrap_Admin {
 		include plugin_dir_path( __FILE__ ) . '/partials/mailtrap-admin-display.php';
 	}
 
-	public function test_page() {
-		$email_sent = null;
-
-		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-			if (!wp_verify_nonce($_POST['_wpnonce'], 'mailtrap_test_action')) {
-				die ('Failed security check');
-			}
-
-			$email_sent = wp_mail($_POST['to'], __('Mailtrap for Wordpress Plugin', 'mailtrap-for-wp'), $_POST['message']);
-		}
-
-		include plugin_dir_path( __FILE__ ) . '/partials/test.php';
-	}
-
 	public function mailtrap($phpmailer) {
 		if (get_option('mailtrap_enabled', false)) {
 			$phpmailer->IsSMTP();
@@ -158,7 +136,6 @@ class Mailtrap_Admin {
 			// $phpmailer->Host = 'sandbox.smtp.mailtrap.io';
 			$phpmailer->SMTPAuth = true;
 			$phpmailer->Port = 2525;
-			// $phpmailer->Port = get_option('mailtrap_port');
 			$phpmailer->Username = get_option('mailtrap_username');
 			$phpmailer->Password = get_option('mailtrap_password');
 			// $phpmailer->SMTPSecure = get_option('mailtrap_secure');

@@ -8,11 +8,6 @@
   }
 }
 
-#wpwrap {
-  /* background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuZGV2L3N2Z2pzIiB2aWV3Qm94PSIwIDAgODAwIDgwMCIgd2lkdGg9IjgwMCIgaGVpZ2h0PSI4MDAiPjxkZWZzPjxwYXR0ZXJuIGlkPSJtbW1vdGlmLXBhdHRlcm4iIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgcGF0dGVyblRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMCkgc2NhbGUoMSkgcm90YXRlKDQ1KSBza2V3WCgwKSBza2V3WSgwKSI+CiAgICA8cmVjdCB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHRyYW5zZm9ybT0ibWF0cml4KDAuODY2MDI1IDAuNSAtMC44NjYwMjUgMC41IDIwIDIpIiBmaWxsPSJoc2woMjEyLCA5MSUsIDU1JSkiPjwvcmVjdD4KICAgIDxyZWN0IHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdHJhbnNmb3JtPSJtYXRyaXgoMC44NjYwMjUgMC41IC0yLjIwMzA1ZS0wOCAxIDQuNDExNjIgMTEpIiBmaWxsPSIjNzBiNGZmIj48L3JlY3Q+CiAgICA8cmVjdCB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHRyYW5zZm9ybT0ibWF0cml4KDAuODY2MDI1IC0wLjUgMi4yMDMwNWUtMDggMSAyMCAyMCkiIGZpbGw9IiMwMDU5YzEiPjwvcmVjdD4KPC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjgwMCIgZmlsbD0idXJsKCNtbW1vdGlmLXBhdHRlcm4pIj48L3JlY3Q+PC9zdmc+"); */
-  /* background-size: cover; */
-}
-
 .wrap {
   @apply min-h-screen-wp;
 }
@@ -21,13 +16,15 @@
   @apply pb-10;
 }
 
-#mailtrap-form {
+#mailtrap-form,
+#mailtrap-inbox {
   @apply bg-white;
   @apply rounded-lg shadow-sm px-4 w-fit h-fit;
   @apply shadow-lg drop-shadow-lg;
   @apply border border-slate-600;
 }
 
+#mailtrap-inbox h3,
 #mailtrap-form h3 {
   @apply mt-4;
   @apply text-2xl;
@@ -111,4 +108,28 @@
 
 .notice-success {
   @apply bg-green-100 border-green-400 text-green-700;
+}
+
+#mailtrap-inbox ul li {
+  @apply rounded-md shadow-md;
+}
+
+#mailtrap-inbox li.active {
+  @apply bg-emerald-600 text-white;
+}
+
+#mailtrap-inbox li:not(.active) {
+  @apply text-gray-900;
+}
+
+#mailtrap-inbox li:not(.active).read:not(:hover) {
+  @apply bg-gray-200;
+}
+
+#mailtrap-inbox li:not(.read) {
+  @apply font-bold;
+}
+
+#mailtrap-inbox ul li:hover {
+  @apply bg-slate-500 text-white transition-colors cursor-pointer;
 }

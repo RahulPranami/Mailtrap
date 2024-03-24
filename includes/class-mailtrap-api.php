@@ -40,6 +40,22 @@ class Mailtrap_API {
         }
     }
 
+    public static function getInbox() {
+        $response = wp_remote_get(self::BASE_URL . '/inboxes/' . get_option('mailtrap_inbox_id'), [
+            'headers' => [
+                'Api-Token' => get_option('mailtrap_api_token')
+            ]
+        ]);
+
+        if (is_array($response) && !is_wp_error($response)) {
+            if (200 != $response['response']['code']) {
+                throw new Exception($response['response']['message'], $response['response']['code']);
+            }
+
+            return json_decode($response['body']);
+        }
+    }
+
     public static function getInboxMessages() {
         $response = wp_remote_get(self::BASE_URL . '/inboxes/' . get_option('mailtrap_inbox_id') . '/messages', [
             'headers' => [
@@ -83,9 +99,8 @@ class Mailtrap_API {
             if (200 != $response['response']['code'] && 404 != $response['response']['code']) {
                 throw new Exception($response['response']['message'], $response['response']['code']);
             }
-
-            if (404 != $response['response']['code']) {
-                return self::getMessageBody(get_option('mailtrap_inbox_id'), $message_id, 'txt');
+            if (404 === $response['response']['code']) {
+                return self::getMessageBody($message_id, 'txt');
             }
             return $response['body'];
         }

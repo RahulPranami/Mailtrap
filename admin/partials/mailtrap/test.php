@@ -3,7 +3,7 @@
     <form id="mailtrap-form" method="post" action="<?php echo admin_url('admin.php?page=mailtrap-test'); ?>">
 
         <h3>
-            <?php echo __('This test sends an email using standard wp_mail function.', 'mailtrap') ?>
+            <?php echo esc_html(get_admin_page_title()); ?>
         </h3>
 
         <?php
