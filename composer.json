@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "phpcs": "phpcs --standard=PSR2 ./ --ignore='*/vendor/*,*/node_modules/*,*/mysql*'"
+    "phpcs": "phpcs --standard=WordPress ./ --ignore='*/vendor/*,*/node_modules/*,*/mysql*'",
+    "phpcbf": "phpcbf --standard=WordPress ./ --ignore='*/vendor/*,*/node_modules/*,*/mysql*'"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "*",
