@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "phpcs": "phpcs --standard=PSR2 ./ --ignore='*/vendor/*,*/node_modules/*,*/mysql*'"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "*",
+    "wp-coding-standards/wpcs": "^3.0"
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
+}
